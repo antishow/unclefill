@@ -1,0 +1,21 @@
+{
+  "name": "unclefill.com",
+  "version": "0.0.0",
+  "description": "Placeholder image site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "placeholder",
+    "image",
+    "rip",
+    "uncle",
+    "phil"
+  ],
+  "author": "Matthew Chase",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "3.4.7"
+  }
+}
