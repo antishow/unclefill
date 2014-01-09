@@ -17,6 +17,6 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "express": "3.4.7",
-    "imagemagick-native": "0.2.9"
+    "imagemagick": "0.1.3"
   }
 }
