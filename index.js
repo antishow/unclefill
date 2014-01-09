@@ -19,7 +19,6 @@ app.get(/^\/(\d+)\/(\d+)/, function(req, res){
 		cached_image = get_cached_image(width, height),
 		source_image;
 
-	console.log("--------* %dx%d *-----------", width, height);
 	if(cached_image)
 	{
 		display_image(res, cached_image);
@@ -29,21 +28,6 @@ app.get(/^\/(\d+)\/(\d+)/, function(req, res){
 		source_image = get_source_image(width, height)
 		display_source_image(res, source_image, width, height);
 	}
-
-	//res.sendfile("library/images/unclephil.jpg");
-
-	/*
-	fs.readFile("library/images/1_33333-1536-1152.jpg", function(err, image_data){
-		im.resize({
-			srcData: image_data,
-			width: 320
-		}, function (err, stdout, stderr){
-			fs.writeFile("library/images/unclephil.resized.jpg", stdout, "binary", function(){
-				res.sendfile("library/images/unclephil.resized.jpg");
-			});
-		});
-	});
-	*/
 });
 
 function get_cached_image(width, height)
@@ -68,21 +52,17 @@ function display_source_image(res, image, width, height)
 		new_filename, 
 		target_aspect_ratio = parseFloat(width/height).toFixed(5);
 
-	console.log("Display %s at an aspect ratio of %d", image, target_aspect_ratio);
 
 	im.identify(image, function(err, features){
 		w = features.width;
 		h = features.height;
 		aspect_ratio = parseFloat(w / h).toFixed(5);
 
-		console.log("Source image aspect ratio is %d", aspect_ratio);
 
 		if(aspect_ratio != target_aspect_ratio)
 		{
 			new_width = Math.floor(h * target_aspect_ratio);
 			new_filename = source_image_path + generate_file_name(target_aspect_ratio, new_width, h);
-
-			console.log("Source image is wrong aspect ratio. Crop to %dx%d and save to %s", new_width, h, new_filename);
 
 			im.crop({
 				srcPath: image,
@@ -119,7 +99,6 @@ function display_image_at_size(res, image, width, height)
 
 function display_image(res, image)
 {
-	console.log("Display %s", image);
 	res.sendfile(image);
 }
 
